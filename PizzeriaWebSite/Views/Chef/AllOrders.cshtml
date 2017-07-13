@@ -1,0 +1,50 @@
+﻿@model IEnumerable<PizzeriaWebSite.Models.Order>
+@{
+    ViewBag.Title = "AllOrders";
+    Layout = "~/Views/Shared/ChefLayout.cshtml";
+}
+
+<h2>All Orders</h2>
+<hr style="border: 0;height: 2px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));" />
+<div class="col-md-12">
+    <table class="table">
+        <tr>
+            <th class="text-center">
+                Order Address
+            </th>
+            <th class="text-center">
+                Client
+            </th>
+            <th class="text-center">
+                Date
+            </th>
+            <th class="text-center">
+                Category
+            </th>
+            <th class="text-center">
+                Is Active
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @item.Address
+                </td>
+                <td class="text-center">
+                    @item.User.Name @item.User.Surname
+                </td>
+                <td class="text-center">
+                    @item.OrderData
+                </td>
+                <td class="text-center">
+                    @item.OrderCategory.CategoryDesc
+                </td>
+                <td class="text-center">
+                    @item.IsActive
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Address";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+    {
+        <div class="form-horizontal">
+            <h2>Order Category:</h2>
+            <div class="form-group">
+                <label class="control-label col-md-2">Choose Category:</label>
+                <div class="col-md-10">
+                    <select name="category" id="ddl" style="margin-top:10px; width:280px; height:20px;"
+                            onchange="if (this.value == '1') { this.form['address'].style.visibility = 'visible' } else { this.form['address'].style.visibility = 'hidden' };">
+                        @foreach (var item in ViewBag.Category)
+                        {
+                            <option value="@item.OrderCategoryID"> @item.CategoryDesc  </option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Choose the nearest Center:</label>
+                <div class="col-md-10">
+                    <select name="center" id="ddlCenter" style="margin-top:20px; width:280px; height:20px;">
+                        @foreach (var i in ViewBag.Centers)
+                        {
+                            <option value="@i.CenterID"> @i.CenterAddress </option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Address:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="address" id="address" style="visibility:visible;" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Checkout" class="btn btn-success" />
+                    @*<a href="@Url.Action("CheckoutwithPaypal", "Paypal")"><img src="~/Images/paypal.png" style="width:200px;" /> </a>*@
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "ChefToCenters";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>ChefToCenters</h2>
+<hr />
+@using (Html.BeginForm("ChefToCenters", "Admin", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Choose Chef:</label>
+            <div class="col-md-10">
+                <select name="chef" id="ddlChefs" style="margin-top:10px; width:280px; height:20px;">
+                    @foreach (var item in ViewBag.User)
+                    {
+                        <option value="@item.UserID"> @item.Name  </option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Choose Centers:</label>
+            <div class="col-md-10">
+                <select name="center" id="ddlCenter" style="margin-top:10px; width:280px; height:20px;">
+                    @foreach (var i in ViewBag.Centers)
+                    {
+                        <option value="@i.CenterID"> @i.CenterAddress </option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+

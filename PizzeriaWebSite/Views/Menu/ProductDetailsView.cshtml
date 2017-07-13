@@ -1,0 +1,66 @@
+﻿@model PizzeriaWebSite.ViewModels.ProductDetails
+@{
+    ViewBag.Title = "ProductDetailsView";
+    var s = Model.prodSize.Price;
+    string cmimi = String.Format("{0:N}", s);
+
+}
+
+<style>
+    #borderimg {
+        border: 10px solid transparent;
+        padding: 15px;
+        -webkit-border-image: url(../../Images/border.png) 30 stretch; /* Safari 3.1-5 */
+        -o-border-image: url(../../Images/border.png) 30 stretch; /* Opera 11-12.1 */
+        border-image: url(../../Images/border.png) 30 stretch;
+    }
+</style>
+<br />
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-7">
+            <h1>@ViewBag.Emri</h1>
+            <img src="~/Images/Products/@Model.prodSize.Product.Image" id="borderimg" class="img-responsive col-md-offset-1" width="520" height="450" />
+        </div>
+        <div class="col-md-4">
+            <h3>Size: <strong>@ViewBag.SS</strong></h3>
+            <h2>Price: <strong>@cmimi &euro;</strong></h2>
+            <br />
+            <table class="table">
+                @if (Model.prodSize.Product.CategoryID != 5)
+                {
+                    <tr>
+                        <th class="text-center">
+                            Ingredients
+                        </th>
+                    </tr>
+                }
+                @foreach (var item in Model.liProdIng)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ingredient.IngredientDesc)
+                        </td>
+                    </tr>
+                }
+                @*@Model.prodSize.ProdSizeID*@
+            </table>
+            <hr />
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @if (Model.prodSize.ProdSizeID == 51 || Model.prodSize.ProdSizeID == 52 || Model.prodSize.ProdSizeID == 53 || Model.prodSize.ProdSizeID == 54)
+                        {
+                            @Html.ActionLink("Costumize Your Own", "CreateYourOwn", "Menu", new { id = Model.prodSize.ProdSizeID }, new { @class = "btn btn-info col-md-12" })
+                        }
+                        else
+                        {
+                            @*@Html.ActionLink("Add to Cart", "Cart", "Cart", new { id = Model.prodSize.ProdSizeID }, new { @class = "btn btn-warning col-md-12" })*@
+                            <a href="@Url.Action("Cart","Cart" , new { id = Model.prodSize.ProdSizeID})" class="btn btn-warning col-md-12">Add to cart <span><i class="glyphicon glyphicon-shopping-cart"></i></span></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

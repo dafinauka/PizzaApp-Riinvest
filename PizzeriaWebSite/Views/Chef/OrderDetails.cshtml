@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PizzeriaWebSite.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/ChefLayout.cshtml";
+    var s = ViewBag.Price;
+    string cmimi = String.Format("{0:N}", s);
+}
+
+<style>
+    hr.style-two {
+        border: 0;
+        height: 2px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+</style>
+
+<h2>OrderDetails</h2>
+<hr class="style-two" />
+<div class="row">
+    <div class="col-md-4 text-center">
+        <h3>Center:<br /> @ViewBag.Center</h3>
+        <hr class="style-two" />
+        <h3>Address: @ViewBag.Address</h3>
+        <hr class="style-two" />
+        <h3>Price: @cmimi &euro; </h3>
+        <hr class="style-two" />
+        <h3>Client PhoneNumber:<br /> @ViewBag.User</h3>
+        <hr class="style-two" />
+    </div>
+    <div class="col-md-8 text-center">
+        <table class="table">
+            <tr>
+                <th class="text-center">
+                    Products
+                </th>
+                <th class="text-center">
+                    Size
+                </th>
+                <th class="text-center">
+                    Quantity
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        <strong>@item.Product_Size.Product.Name</strong>
+                        <br />
+                        @if (item.ProductSizeID == 51 || item.ProductSizeID == 52 || item.ProductSizeID == 53 || item.ProductSizeID == 54)
+                        {
+                            if (Session["toppings"] != null)
+                            {
+                                foreach (var i in (List<string>)Session["toppings"])
+                                {
+                                <p>@i</p>
+                                }
+                            }
+                            else
+                            {
+                                <p>Proscutio</p>
+                                <p>Mushrooms</p>
+                                <p>Olives</p>
+                            }
+                        }                       
+                    </td>
+                    <td class="text-center">
+                        @item.Product_Size.Size.SizeDesc
+                    </td>
+                    <td class="text-center">
+                        @item.Quantity
+                    </td>
+                </tr>
+            }
+        </table>
+        @Html.ActionLink("Done", "Done", "Chef", new { id = ViewBag.OderdID }, new { @class = "btn btn-success" })
+    </div>
+
+</div>

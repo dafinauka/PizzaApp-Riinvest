@@ -1,0 +1,155 @@
+﻿@model PizzeriaWebSite.Models.Product_Size
+@{
+    ViewBag.Title = "CreateYourOwn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var s = Model.Price;
+    string cmimi = String.Format("{0:N}", s);
+}
+<br /><br /><br /><br /><br />
+<div class="container">
+
+    <div class="row">
+        <div class="container">
+
+            <div class="col-md-6" style="height:55vh;">
+                <img src="~/Images/CreateYourOwn/pizzapan.png" id="pizzapan" style="position:absolute; margin-top:-90px;" class="img-responsive" />
+                <img src="~/Images/CreateYourOwn/ketchup.png" id="sauce" style="position:absolute;  margin-top:-90px;" class="img-responsive" />
+                <img src="~/Images/CreateYourOwn/cheese.png" id="cheesse" style="position:absolute;  margin-top:-90px;" class="img-responsive" />
+                <img src="" id="img" style="position:absolute;  margin-top:-90px;" class="img-responsive" />
+                <img src="" id="mushroom" style="position:absolute;  margin-top:-90px;" class="img-responsive" />
+                <img src="" id="olives" style="position:absolute; margin-top:-90px;" class="img-responsive" />
+                <img src="" id="onions" style="position:absolute; margin-top:-90px;" class="img-responsive" />
+                <img src="" id="peppers" style="position:absolute; margin-top:-90px;" class="img-responsive" />
+                <img src="" id="pineapple" style="position:absolute; margin-top:-90px;" class="img-responsive" />
+            </div>
+
+            <div class="col-md-4">
+                <div class="col-md-12 text-center">
+                    <h1>@Model.Product.Name</h1>
+                    @*@Model.ProdSizeID*@
+                    <h3>Size: <strong>@Model.Size.SizeDesc</strong></h3>
+                    <h2>Price: <strong>@cmimi &euro;</strong></h2>
+                </div>
+                <div class="col-md-offset-2">
+                    @using (Html.BeginForm("CreateYourOwn", "Menu", FormMethod.Post))
+                    {
+                    <select style="margin-top:10px; width:235px; height:20px;" id="ddl" name="food" onchange="IMAGE()">
+                        <option value="select" selected="selected">Choose some meat</option>
+                        <option value="chicken">Chicken</option>
+                        <option value="meatballs">MeatBalls</option>
+                        <option value="pepperoni">Pepperoni</option>
+                        <option value="beef">Beef</option>
+                        <option value="proscuttio">Proscuttio</option>
+                    </select><br><br>
+                    <div class="col-md-offset-3">
+                        <input type="checkbox" id="chbxMushroom" name="food" value="Mushrooms" onchange="AddMushroom()"> Mushroom<br>
+                        <input type="checkbox" id="chbxOlives" name="food" value="Olives" onchange="AddOlives()"> Olives<br>
+                        <input type="checkbox" id="chbxOnions" name="food" value="Onions" onchange="AddOnions()"> Onions<br>
+                        <input type="checkbox" id="chbxPeppers" name="food" value="Peppers" onchange="AddPeppers()"> Peppers<br>
+                        <input type="checkbox" id="chbxPineapple" name="food" value="Pineapple" onchange="AddPineapple()"> Pineapple<br><br>
+                    </div>
+                    <input type="submit" value="Create Pizza" name="submit" class="btn btn-success col-md-10" />
+                    }
+                    <br />
+                        @if ((List<string>)Session["toppings"] != null)
+                        {
+                            <a href="@Url.Action("Cart", "Cart", new { id = Model.ProdSizeID })" class="btn btn-warning col-md-10">Add to cart <span><i class="glyphicon glyphicon-shopping-cart"></i></span></a>
+                        }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function IMAGE() {
+
+        var e = document.getElementById("ddl");
+
+        var value = e.options[e.selectedIndex].innerHTML;
+
+        if (value == "select") {
+            document.getElementById("img").src = '';
+        }
+        if (value == "MeatBalls") {
+            document.getElementById("img").src = '@Url.Content("~/Images/CreateYourOwn/meatballs.png")';
+        }
+        if (e.value == "chicken") {
+            document.getElementById("img").src = '@Url.Content("~/Images/CreateYourOwn/chicken.png")';
+        }
+        if (value == "Beef") {
+            document.getElementById("img").src = '@Url.Content("~/Images/CreateYourOwn/beef.png")';
+        }
+        if (value == "Proscuttio") {
+            document.getElementById("img").src = '@Url.Content("~/Images/CreateYourOwn/proscuttio.png")';
+        }
+        if (value == "Pepperoni") {
+            document.getElementById("img").src = '@Url.Content("~/Images/CreateYourOwn/peperoni.png")';
+        }
+
+        //document.getElementById("btn").disabled = true;
+    }//src ndrro
+
+    function AddMushroom() {
+        var checkbox = document.getElementById("chbxMushroom");
+
+
+        if (checkbox.checked == true) {
+            document.getElementById("mushroom").src = '@Url.Content("~/Images/CreateYourOwn/mushroom.png")';
+        }
+        else {
+            document.getElementById("mushroom").src = "";
+        }
+    };
+
+    function AddOlives() {
+        var checkbox = document.getElementById("chbxOlives");
+
+
+        if (checkbox.checked == true) {
+            document.getElementById("olives").src = '@Url.Content("~/Images/CreateYourOwn/olives.png")';
+        }
+        else {
+            document.getElementById("olives").src = "";
+        }
+    };
+
+    function AddOnions() {
+        var checkbox = document.getElementById("chbxOnions");
+
+
+        if (checkbox.checked == true) {
+            document.getElementById("onions").src = '@Url.Content("~/Images/CreateYourOwn/onions.png")';
+        }
+        else {
+            document.getElementById("onions").src = "";
+        }
+    };
+
+    function AddPeppers() {
+        var checkbox = document.getElementById("chbxPeppers");
+
+        if (checkbox.checked == true) {
+            document.getElementById("peppers").src = '@Url.Content("~/Images/CreateYourOwn/peppers.png")';
+        }
+        else {
+            document.getElementById("peppers").src = "";
+        }
+    };
+
+    function AddPineapple() {
+        var checkbox = document.getElementById("chbxPineapple");
+
+
+        if (checkbox.checked == true) {
+            document.getElementById("pineapple").src = '@Url.Content("~/Images/CreateYourOwn/pineapple.png")';
+        }
+        else {
+            document.getElementById("pineapple").src = "";
+        }
+    };
+
+</script>
+

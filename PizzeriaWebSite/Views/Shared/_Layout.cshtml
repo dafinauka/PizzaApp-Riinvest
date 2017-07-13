@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - E-Pizzeria</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body style="background-image: url(../../Images/bgImg.jpg); background-size: cover; background-attachment: fixed;">
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href='@Url.Action("Index", "Home")'>
+                    <img src="~/Images/logo.png" style="height:50px;" />
+                </a>
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="@Url.Action("Index","Home")">Home <span class="glyphicon glyphicon-home"></span></a></li>
+                    <li><a href="@Url.Action("PizzaMenu", "Menu")">Pizza <span class="glyphicon glyphicon-heart"></span></a></li>
+                    <li><a href="@Url.Action("OthersMenu", "Menu")">Sandwiches <span class="glyphicon glyphicon-cutlery"></span></a></li>
+                    <li><a href="@Url.Action("DrinksMenu", "Menu")">Drinks <span class="glyphicon glyphicon-glass"></span></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            @*using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                            }*@
+                            <a href="@Url.Action("Logout", "Account")">Logout <span class="glyphicon glyphicon-off"></span></a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Login", "Account")">Login <span class="glyphicon glyphicon-user"></span></a>
+                        }
+                    </li>
+                    <li><a href="@Url.Action("ClientProfile","Account")">Profile <span class="glyphicon glyphicon-user"></span></a></li>
+                    @*<li>@Html.ActionLink("Products", "Index", "Products")</li>
+                    <li>@Html.ActionLink("Orders", "Index", "Chef")</li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+        <hr style="border: 0;height: 2px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));" />
+        <footer>
+            <p class="text-center">&copy; @DateTime.Now.Year - E-Pizzeria</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

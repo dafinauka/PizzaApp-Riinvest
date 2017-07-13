@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using PizzeriaWebSite.ViewModels;
+
+<style>
+    #borderimg {
+        border: 10px solid transparent;
+        padding: 5px;
+        -webkit-border-image: url(../../Images/border.png) 30 stretch; /* Safari 3.1-5 */
+        -o-border-image: url(../../Images/border.png) 30 stretch; /* Opera 11-12.1 */
+        border-image: url(../../Images/border.png) 30 stretch;
+    }
+</style>
+<div class="container">
+    <h2>Your Cart</h2>
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th class="text-center">Image</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Size</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Remove</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @{
+                int x = 0;
+            }
+            @foreach (var product in (List<Item>) Session["cart"])
+            {
+
+                var s = (product.Quantity * product.product.Price);
+                string cmimi = String.Format("{0:N}", s);
+
+                <tr>
+                    <th class="text-center">
+                        <img src="~/Images/Products/@product.product.Product.Image" id="borderimg" width="150" height="100" />
+                    </th>
+                    <td class="text-center" style="padding-top:35px;"><h4>@product.product.Product.Name </h4></td>
+                    <td class="text-center" style="padding-top:35px;"><h4>@product.product.Size.SizeDesc </h4></td>
+                    <td class="text-center" style="padding-top:35px;"><h4>@product.Quantity</h4></td>
+                    <td class="text-center" style="padding-top:35px;"><h4>@cmimi &euro;</h4></td>
+                    <td class="text-center" style="padding-top:20px;">
+                        <h3><a href="@Url.Action("Delete","Cart",new { id = x})"><span><i class="glyphicon glyphicon-trash"></i></span></a> </h3>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                x++;
+            }
+            <tr>
+                <td colspan="6" style="text-align:right;">
+                    @{
+                        List<Item> cart = (List<Item>)Session["cart"];
+                        var totalPrice = cart.Sum(i => i.Quantity * i.product.Price);
+                        string cmimiTotal = String.Format("{0:N}", totalPrice);
+                    }
+                    <h2> Total: @cmimiTotal &euro;</h2>
+                </td>
+            </tr>
+        </table>
+        <a href="@Url.Action("Address","Cart")" class="btn btn-info pull-right">Continue<span><i class="glyphicon glyphicon-chevron-right"></i></span></a>
+        @*<a href="@Url.Action("PaypalAddress","Cart")" style="margin-right:20px" class="btn btn-info pull-right">Continue with PayPal<span><i class="glyphicon glyphicon-chevron-right"></i></span></a>*@
+    </div>
+</div>

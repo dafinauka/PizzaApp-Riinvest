@@ -1,0 +1,85 @@
+﻿@model PizzeriaWebSite.ViewModels.UserProfile
+@{
+    ViewBag.Title = "ClientProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    hr.style-two {
+        border: 0;
+        height: 2px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+</style>
+
+
+<div class="container">
+    <h2>Your Profile</h2>
+    <hr class="style-two" />
+    <div class="row">
+        <div class="col-md-5 text-center">
+            <div class="col-md-12">
+                <img src="~/Images/Users/@Model.useri.Image" class="img-responsive col-md-offset-3 col-md-6" />
+            </div>
+            <div class="col-md-12">
+                <h2>@Model.useri.Name @Model.useri.Surname</h2>
+                <hr class="style-two" />
+            </div>
+            <div class="col-md-12">
+                <h3>@Model.useri.Phone</h3>
+                <h3>@Model.useri.Email</h3>
+            </div>
+        </div>
+        <div class="col-md-7 text-center">
+            <div class="col-md-12">
+                <table class="table">
+                    <tr>
+                        <th style="color:gray;" colspan="5" class="text-center">
+                            Orders Done
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">
+                            Address
+                        </th>
+                        <th class="text-center">
+                            Center
+                        </th>
+                        <th class="text-center">
+                            Order Date
+                        </th>
+                        <th class="text-center">
+                            Order Category
+                        </th>
+                        <th>
+                            Cancel order
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.orders)
+                    {
+                        <tr>
+                            <td>
+                                @item.Address
+                            </td>
+                            <td>
+                                @item.Center.CenterAddress     
+                            </td>
+                            <td>
+                                @item.OrderData
+                            </td>
+                            <td>
+                                @item.OrderCategory.CategoryDesc
+                            </td>
+                            <td>
+                                @if (item.IsActive == true)
+                                {
+                                    @Html.ActionLink("Cancel", "Done", "Account", new { id = item.OrderID }, new { @class = "btn btn-danger" })
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

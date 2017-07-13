@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6324c16987d0472a9f0fa626312a009d" Name="Diagram1">
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Category" Width="1.5" PointX="1.5" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Center" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Ingredient_Category" Width="1.5" PointX="3.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Ingredient" Width="1.5" PointX="1.75" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.OrderCategory" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.OrderDetail" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Order" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Product_Ingredients" Width="1.5" PointX="4" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Product_Size" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Product" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Role" Width="1.5" PointX="1.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.Size" Width="1.5" PointX="0.75" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.User_Center" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaDemoDBModel.User" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Ingredient_Category_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Products_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Orders_Centers" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_User_Center_Centers" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Ingredient_Category_Ingredients" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Product_Ingredients_Ingredients" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Orders_OrderCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_OrderDetails_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_OrderDetails_Product_Size" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Orders_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Product_Ingredients_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Product_Size_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Product_Size_Size" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaDemoDBModel.FK_User_Center_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PizzeriaWebSite.Models.Product>
+
+
+<br /><br /><br />
+<div class="container">
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-sm-6 col-md-4">
+                @using (Html.BeginForm("ProductDetailsView", "Menu", FormMethod.Post))
+                {
+                    <div class="thumbnail">
+                        <img src="~/Images/Products/@item.Image" alt="...">
+                        <input type="hidden" name="productID" value="@item.ProductID" />
+                        <input type="hidden" name="size" value="5" />
+                        <div class="caption">
+                            <input type="submit" name="submit" value="@item.Name" class="btn btn-info btn-xs col-md-12" /><br />
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+</div>

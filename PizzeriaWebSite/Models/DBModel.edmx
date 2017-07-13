@@ -1,0 +1,1000 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PizzaDemoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Centers">
+          <Key>
+            <PropertyRef Name="CenterID" />
+          </Key>
+          <Property Name="CenterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CenterAddress" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Ingredient_Category">
+          <Key>
+            <PropertyRef Name="Cat_Ing_ID" />
+          </Key>
+          <Property Name="Cat_Ing_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IngredientID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="Ingredients">
+          <Key>
+            <PropertyRef Name="IngredientID" />
+          </Key>
+          <Property Name="IngredientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IngredientDesc" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrderCategory">
+          <Key>
+            <PropertyRef Name="OrderCategoryID" />
+          </Key>
+          <Property Name="OrderCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryDesc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetailsID" />
+          </Key>
+          <Property Name="OrderDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="ProductSizeID" Type="int" />
+          <Property Name="Quantity" Type="tinyint" />
+          <Property Name="PricePerProduct" Type="money" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="OrderData" Type="date" Nullable="false" />
+          <Property Name="CenterID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Product_Ingredients">
+          <Key>
+            <PropertyRef Name="Prod_Ing_ID" />
+          </Key>
+          <Property Name="Prod_Ing_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="IngredientID" Type="int" />
+        </EntityType>
+        <EntityType Name="Product_Size">
+          <Key>
+            <PropertyRef Name="ProdSizeID" />
+          </Key>
+          <Property Name="ProdSizeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="SizeID" Type="int" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="SizeID" />
+          </Key>
+          <Property Name="SizeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SizeDesc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User_Center">
+          <Key>
+            <PropertyRef Name="UserCenterID" />
+          </Key>
+          <Property Name="UserCenterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CenterID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" />
+          <Property Name="RoleID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Ingredient_Category_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Ingredient_Category" Type="Self.Ingredient_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Ingredient_Category">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingredient_Category_Ingredients">
+          <End Role="Ingredients" Type="Self.Ingredients" Multiplicity="0..1" />
+          <End Role="Ingredient_Category" Type="Self.Ingredient_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="Ingredient_Category">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Product_Size">
+          <End Role="Product_Size" Type="Self.Product_Size" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Size">
+              <PropertyRef Name="ProdSizeID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductSizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Centers">
+          <End Role="Centers" Type="Self.Centers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Centers">
+              <PropertyRef Name="CenterID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CenterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Clients">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderCategory">
+          <End Role="OrderCategory" Type="Self.OrderCategory" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderCategory">
+              <PropertyRef Name="OrderCategoryID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Ingredients_Ingredients">
+          <End Role="Ingredients" Type="Self.Ingredients" Multiplicity="0..1" />
+          <End Role="Product_Ingredients" Type="Self.Product_Ingredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="Product_Ingredients">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Ingredients_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Product_Ingredients" Type="Self.Product_Ingredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Ingredients">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Size_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Product_Size" Type="Self.Product_Size" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Size">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Size_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="Product_Size" Type="Self.Product_Size" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="SizeID" />
+            </Principal>
+            <Dependent Role="Product_Size">
+              <PropertyRef Name="SizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Center_Centers">
+          <End Role="Centers" Type="Self.Centers" Multiplicity="1" />
+          <End Role="User_Center" Type="Self.User_Center" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Centers">
+              <PropertyRef Name="CenterID" />
+            </Principal>
+            <Dependent Role="User_Center">
+              <PropertyRef Name="CenterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Center_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="User_Center" Type="Self.User_Center" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="User_Center">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PizzaDemoDBModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Centers" EntityType="Self.Centers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingredient_Category" EntityType="Self.Ingredient_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderCategory" EntityType="Self.OrderCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Ingredients" EntityType="Self.Product_Ingredients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Size" EntityType="Self.Product_Size" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Center" EntityType="Self.User_Center" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ingredient_Category_Category" Association="Self.FK_Ingredient_Category_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Ingredient_Category" EntitySet="Ingredient_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingredient_Category_Ingredients" Association="Self.FK_Ingredient_Category_Ingredients">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="Ingredient_Category" EntitySet="Ingredient_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Product_Size" Association="Self.FK_OrderDetails_Product_Size">
+            <End Role="Product_Size" EntitySet="Product_Size" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Centers" Association="Self.FK_Orders_Centers">
+            <End Role="Centers" EntitySet="Centers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Clients" Association="Self.FK_Orders_Clients">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderCategory" Association="Self.FK_Orders_OrderCategory">
+            <End Role="OrderCategory" EntitySet="OrderCategory" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Ingredients_Ingredients" Association="Self.FK_Product_Ingredients_Ingredients">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="Product_Ingredients" EntitySet="Product_Ingredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Ingredients_Products" Association="Self.FK_Product_Ingredients_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Ingredients" EntitySet="Product_Ingredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Size_Products" Association="Self.FK_Product_Size_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Size" EntitySet="Product_Size" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Size_Size" Association="Self.FK_Product_Size_Size">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="Product_Size" EntitySet="Product_Size" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Center_Centers" Association="Self.FK_User_Center_Centers">
+            <End Role="Centers" EntitySet="Centers" />
+            <End Role="User_Center" EntitySet="User_Center" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Center_Users" Association="Self.FK_User_Center_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Center" EntitySet="User_Center" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PizzaDemoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ingredient_Category" Relationship="Self.FK_Ingredient_Category_Category" FromRole="Category" ToRole="Ingredient_Category" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Category" FromRole="Category" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Center">
+          <Key>
+            <PropertyRef Name="CenterID" />
+          </Key>
+          <Property Name="CenterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CenterAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Centers" FromRole="Centers" ToRole="Orders" />
+          <NavigationProperty Name="User_Center" Relationship="Self.FK_User_Center_Centers" FromRole="Centers" ToRole="User_Center" />
+        </EntityType>
+        <EntityType Name="Ingredient_Category">
+          <Key>
+            <PropertyRef Name="Cat_Ing_ID" />
+          </Key>
+          <Property Name="Cat_Ing_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IngredientID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Ingredient_Category_Category" FromRole="Ingredient_Category" ToRole="Category" />
+          <NavigationProperty Name="Ingredient" Relationship="Self.FK_Ingredient_Category_Ingredients" FromRole="Ingredient_Category" ToRole="Ingredients" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="IngredientID" />
+          </Key>
+          <Property Name="IngredientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IngredientDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Ingredient_Category" Relationship="Self.FK_Ingredient_Category_Ingredients" FromRole="Ingredients" ToRole="Ingredient_Category" />
+          <NavigationProperty Name="Product_Ingredients" Relationship="Self.FK_Product_Ingredients_Ingredients" FromRole="Ingredients" ToRole="Product_Ingredients" />
+        </EntityType>
+        <EntityType Name="OrderCategory">
+          <Key>
+            <PropertyRef Name="OrderCategoryID" />
+          </Key>
+          <Property Name="OrderCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_OrderCategory" FromRole="OrderCategory" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailsID" />
+          </Key>
+          <Property Name="OrderDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="ProductSizeID" Type="Int32" />
+          <Property Name="Quantity" Type="Byte" />
+          <Property Name="PricePerProduct" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Product_Size" Relationship="Self.FK_OrderDetails_Product_Size" FromRole="OrderDetails" ToRole="Product_Size" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="OrderData" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CenterID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Center" Relationship="Self.FK_Orders_Centers" FromRole="Orders" ToRole="Centers" />
+          <NavigationProperty Name="OrderCategory" Relationship="Self.FK_Orders_OrderCategory" FromRole="Orders" ToRole="OrderCategory" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Orders_Clients" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Product_Ingredients">
+          <Key>
+            <PropertyRef Name="Prod_Ing_ID" />
+          </Key>
+          <Property Name="Prod_Ing_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="IngredientID" Type="Int32" />
+          <NavigationProperty Name="Ingredient" Relationship="Self.FK_Product_Ingredients_Ingredients" FromRole="Product_Ingredients" ToRole="Ingredients" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Ingredients_Products" FromRole="Product_Ingredients" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Product_Size">
+          <Key>
+            <PropertyRef Name="ProdSizeID" />
+          </Key>
+          <Property Name="ProdSizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="SizeID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Product_Size" FromRole="Product_Size" ToRole="OrderDetails" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Size_Products" FromRole="Product_Size" ToRole="Products" />
+          <NavigationProperty Name="Size" Relationship="Self.FK_Product_Size_Size" FromRole="Product_Size" ToRole="Size" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Products_Category" FromRole="Products" ToRole="Category" />
+          <NavigationProperty Name="Product_Ingredients" Relationship="Self.FK_Product_Ingredients_Products" FromRole="Products" ToRole="Product_Ingredients" />
+          <NavigationProperty Name="Product_Size" Relationship="Self.FK_Product_Size_Products" FromRole="Products" ToRole="Product_Size" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="SizeID" />
+          </Key>
+          <Property Name="SizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SizeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product_Size" Relationship="Self.FK_Product_Size_Size" FromRole="Size" ToRole="Product_Size" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User_Center">
+          <Key>
+            <PropertyRef Name="UserCenterID" />
+          </Key>
+          <Property Name="UserCenterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CenterID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Center" Relationship="Self.FK_User_Center_Centers" FromRole="User_Center" ToRole="Centers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Center_Users" FromRole="User_Center" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Clients" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="User_Center" Relationship="Self.FK_User_Center_Users" FromRole="Users" ToRole="User_Center" />
+        </EntityType>
+        <Association Name="FK_Ingredient_Category_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Ingredient_Category" Type="Self.Ingredient_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Ingredient_Category">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Centers">
+          <End Role="Centers" Type="Self.Center" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Centers">
+              <PropertyRef Name="CenterID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CenterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Center_Centers">
+          <End Role="Centers" Type="Self.Center" Multiplicity="1" />
+          <End Role="User_Center" Type="Self.User_Center" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Centers">
+              <PropertyRef Name="CenterID" />
+            </Principal>
+            <Dependent Role="User_Center">
+              <PropertyRef Name="CenterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingredient_Category_Ingredients">
+          <End Role="Ingredients" Type="Self.Ingredient" Multiplicity="0..1" />
+          <End Role="Ingredient_Category" Type="Self.Ingredient_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="Ingredient_Category">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Ingredients_Ingredients">
+          <End Role="Ingredients" Type="Self.Ingredient" Multiplicity="0..1" />
+          <End Role="Product_Ingredients" Type="Self.Product_Ingredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredients">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="Product_Ingredients">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderCategory">
+          <End Role="OrderCategory" Type="Self.OrderCategory" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderCategory">
+              <PropertyRef Name="OrderCategoryID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Product_Size">
+          <End Role="Product_Size" Type="Self.Product_Size" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Size">
+              <PropertyRef Name="ProdSizeID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductSizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Clients">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Ingredients_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product_Ingredients" Type="Self.Product_Ingredients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Ingredients">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Size_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product_Size" Type="Self.Product_Size" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Size">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Size_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="Product_Size" Type="Self.Product_Size" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="SizeID" />
+            </Principal>
+            <Dependent Role="Product_Size">
+              <PropertyRef Name="SizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Center_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Center" Type="Self.User_Center" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="User_Center">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PizzaDemoDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Centers" EntityType="Self.Center" />
+          <EntitySet Name="Ingredient_Category" EntityType="Self.Ingredient_Category" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
+          <EntitySet Name="OrderCategories" EntityType="Self.OrderCategory" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Product_Ingredients" EntityType="Self.Product_Ingredients" />
+          <EntitySet Name="Product_Size" EntityType="Self.Product_Size" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Sizes" EntityType="Self.Size" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="User_Center" EntityType="Self.User_Center" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Ingredient_Category_Category" Association="Self.FK_Ingredient_Category_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Ingredient_Category" EntitySet="Ingredient_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Centers" Association="Self.FK_Orders_Centers">
+            <End Role="Centers" EntitySet="Centers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Center_Centers" Association="Self.FK_User_Center_Centers">
+            <End Role="Centers" EntitySet="Centers" />
+            <End Role="User_Center" EntitySet="User_Center" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingredient_Category_Ingredients" Association="Self.FK_Ingredient_Category_Ingredients">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="Ingredient_Category" EntitySet="Ingredient_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Ingredients_Ingredients" Association="Self.FK_Product_Ingredients_Ingredients">
+            <End Role="Ingredients" EntitySet="Ingredients" />
+            <End Role="Product_Ingredients" EntitySet="Product_Ingredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderCategory" Association="Self.FK_Orders_OrderCategory">
+            <End Role="OrderCategory" EntitySet="OrderCategories" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Product_Size" Association="Self.FK_OrderDetails_Product_Size">
+            <End Role="Product_Size" EntitySet="Product_Size" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Clients" Association="Self.FK_Orders_Clients">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Ingredients_Products" Association="Self.FK_Product_Ingredients_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Ingredients" EntitySet="Product_Ingredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Size_Products" Association="Self.FK_Product_Size_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Size" EntitySet="Product_Size" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Size_Size" Association="Self.FK_Product_Size_Size">
+            <End Role="Size" EntitySet="Sizes" />
+            <End Role="Product_Size" EntitySet="Product_Size" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Center_Users" Association="Self.FK_User_Center_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Center" EntitySet="User_Center" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PizzaDemoDBModelStoreContainer" CdmEntityContainer="PizzaDemoDBEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Centers">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Center">
+              <MappingFragment StoreEntitySet="Centers">
+                <ScalarProperty Name="CenterID" ColumnName="CenterID" />
+                <ScalarProperty Name="CenterAddress" ColumnName="CenterAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredient_Category">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Ingredient_Category">
+              <MappingFragment StoreEntitySet="Ingredient_Category">
+                <ScalarProperty Name="Cat_Ing_ID" ColumnName="Cat_Ing_ID" />
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredients">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Ingredient">
+              <MappingFragment StoreEntitySet="Ingredients">
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+                <ScalarProperty Name="IngredientDesc" ColumnName="IngredientDesc" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderCategories">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.OrderCategory">
+              <MappingFragment StoreEntitySet="OrderCategory">
+                <ScalarProperty Name="OrderCategoryID" ColumnName="OrderCategoryID" />
+                <ScalarProperty Name="CategoryDesc" ColumnName="CategoryDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="OrderDetailsID" ColumnName="OrderDetailsID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PricePerProduct" ColumnName="PricePerProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="OrderData" ColumnName="OrderData" />
+                <ScalarProperty Name="CenterID" ColumnName="CenterID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Ingredients">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Product_Ingredients">
+              <MappingFragment StoreEntitySet="Product_Ingredients">
+                <ScalarProperty Name="Prod_Ing_ID" ColumnName="Prod_Ing_ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Size">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Product_Size">
+              <MappingFragment StoreEntitySet="Product_Size">
+                <ScalarProperty Name="ProdSizeID" ColumnName="ProdSizeID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sizes">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="SizeDesc" ColumnName="SizeDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Center">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.User_Center">
+              <MappingFragment StoreEntitySet="User_Center">
+                <ScalarProperty Name="UserCenterID" ColumnName="UserCenterID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CenterID" ColumnName="CenterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PizzaDemoDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

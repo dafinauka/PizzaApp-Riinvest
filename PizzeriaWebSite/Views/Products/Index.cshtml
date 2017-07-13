@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PizzeriaWebSite.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                Availability
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src="~/Images/Products/@item.Image" height="100" width="150" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }) |
+                    @*@Html.ActionLink("Add Ingredients", "Add", new { id = item.ProductID, id2 = item.CategoryID}) |*@
+                    @Html.ActionLink("Size", "AddSize", new { id = item.ProductID }) |
+                    @using (Html.BeginForm("Add", "Products", new { id= item.ProductID,catID = item.CategoryID }))
+                    {
+
+                        <input type="hidden" name="productID" value="@item.ProductID" />
+                        <input type="hidden" name="category" value="@item.CategoryID" />
+
+                        <input type="submit"  name="submit" value="Add Ingredients" class="btn btn-link"/>                    
+                    }
+                    @Html.ActionLink("Edit Ingredients", "EditIng", new { id = item.ProductID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

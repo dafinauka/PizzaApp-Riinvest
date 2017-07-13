@@ -1,0 +1,28 @@
+﻿@model IEnumerable<PizzeriaWebSite.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/ChefLayout.cshtml";
+}
+
+<h2>Orders</h2>
+<hr style="border: 0;height: 2px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));" />
+<div class="col-md-12">
+    <table class="table">
+        <tr>
+            <th class="text-center">
+                Upcoming orders
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*@Html.ActionLink(item.Address, "OrderDetails", "Chef", new { id = item.OrderID }, new { @class = "btn btn-info btn-lg col-md-12" })*@
+                    <a id="linku" href="@Url.Action("OrderDetails","Chef", new { id = item.OrderID })" class="btn btn-info btn-lg col-md-12" onclick=" changeClass()">@item.Address</a>
+                
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>E - Pizzeria</h1>
+    <p class="lead">Welcome in the Admin Home page of E-Pizzeria. Below you can find the button. Press the button to access products. You also can Add new product, edit it, insert ingredients, set the size and the price.</p>
+    <p><a href="@Url.Action("Index","Products")" class="btn btn-primary btn-lg">Products &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Users</h2>
+        <p>
+            Users Page. Find out who is using your platform, what is their role, what can they do..?
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Users")">Users &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Chefs</h2>
+        <p>
+            Chef page. After changing the user role into chef, he will display in this page. Set his of her center. 
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("ChefsIndex","Admin")">Chefs &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Orders</h2>
+        <p>Orders Page. Find out how many orders are done. Check the total prices, centers and the address. </p>
+        <p><a class="btn btn-default" href="@Url.Action("AllOrders","Chef")">Orders &raquo;</a></p>
+    </div>
+</div>

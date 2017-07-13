@@ -1,0 +1,320 @@
+﻿@model PizzeriaWebSite.ViewModels.ContactUsViewModel
+
+
+<style>
+    .contact-us-form .forma {
+        display: block;
+        width: 100% !important;
+        height: 50px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 21px;
+        color: #555;
+        border: 1px solid #aeaeae;
+        border-radius: 3px;
+        margin-bottom: 15px;
+        opacity: .8;
+        outline: 0px !important;
+        transition: all 1s;
+        -moz-transition: all 1s;
+        -o-transition: all 1s;
+        -webkit-transition: all 1s;
+    }
+
+    .txtarea {
+        height: 117px;
+        resize: none;
+        width: 100% !important;
+        display: block;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 21px;
+        color: #555;
+        border: 1px solid #aeaeae;
+        border-radius: 3px;
+        margin-bottom: 15px;
+        opacity: .8;
+        outline: 0px !important;
+        transition: all 1s;
+        -moz-transition: all 1s;
+        -o-transition: all 1s;
+        -webkit-transition: all 1s;
+    }
+
+    .submit-btn,
+    .submit-btn:active,
+    .submit-btn:focus,
+    .submit-btn:visited {
+        background-color: transparent;
+        border: 1px solid #511C39;
+        border-radius: 4px;
+        width: 100%;
+        height: 50px;
+        text-transform: uppercase;
+        font-size: 18px;
+        color: #511C39;
+        outline: 0px !important;
+        transition: all 1s;
+        -moz-transition: all 1s;
+        -o-transition: all 1s;
+        -webkit-transition: all 1s;
+    }
+
+        .submit-btn:hover {
+            background: #511C39;
+            color: #fff;
+            border-color: #511C39;
+        }
+
+    hr.style-two {
+        border: 0;
+        height: 2px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+
+    #img {
+        width: 45px;
+        margin-top:3px;
+        margin-right: 25px;
+    }
+
+        #img:hover {
+            background-color: white;
+            transition: all 1s;
+            border-color:white;
+            border-radius:6px;
+        } 
+</style>
+
+
+<div id="bg">
+    <div class="contact-us-form">
+
+        <div class="container">
+
+            @using (Html.BeginForm("ContactUs", "Home", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Contact Us</h2>
+                        <hr class="style-two" />
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        @Html.TextBoxFor(c => c.Name, new { @class = "forma", placeholder = "Name" })
+                        @Html.ValidationMessageFor(c => c.Name, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(c => c.Email, new { @class = "forma", placeholder = "Email" })
+                        @Html.ValidationMessageFor(c => c.Email, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(c => c.Subject, new { @class = "forma", placeholder = "Subject" })
+                        @Html.ValidationMessageFor(c => c.Subject, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="col-md-8">
+
+                        @Html.TextAreaFor(c => c.Message, 25, 140, new { @class = "txtarea", placeholder = "Message Text...." })
+                        @Html.ValidationMessageFor(c => c.Message, "", new { @class = "text-danger" })
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-default submit-btn form_submit">SEND</button>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row text-center">
+                                    <a href="https://www.facebook.com/sachpizza/" target="_blank"><img src="~/Images/Socialicons/facebook.png" id="img" /></a>
+                                    <a href="https://www.instagram.com/sachpizza/?hl=en" target="_blank"><img src="~/Images/Socialicons/instagram.png" id="img" /></a>
+                                    <a href="https://twitter.com/sachpizza?lang=en" target="_blank"><img src="~/Images/Socialicons/twitter.png" id="img" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+            <hr class="style-two" />
+            <script src="https://maps.googleapis.com/maps/api/js?key=&extension=.js"></script>
+            <script src="https://cdn.mapkit.io/v1/infobox.js"></script>
+            <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+            <link href="https://cdn.mapkit.io/v1/infobox.css" rel="stylesheet">
+
+            <script>
+
+    google.maps.event.addDomListener(window, 'load', init);
+    var map, markersArray = [];
+
+    function bindInfoWindow(marker, map, location) {
+        google.maps.event.addListener(marker, 'click', function() {
+            function close(location) {
+                location.ib.close();
+                location.infoWindowVisible = false;
+                location.ib = null;
+            }
+
+            if (location.infoWindowVisible === true) {
+                close(location);
+            } else {
+                markersArray.forEach(function(loc, index){
+                    if (loc.ib && loc.ib !== null) {
+                        close(loc);
+                    }
+                });
+
+                var boxText = document.createElement('div');
+                boxText.style.cssText = 'background: #fff;';
+                boxText.classList.add('md-whiteframe-2dp');
+
+                function buildPieces(location, el, part, icon) {
+                    if (location[part] === '') {
+                        return '';
+                    } else if (location.iw[part]) {
+                        switch(el){
+                            case 'photo':
+                                if (location.photo){
+                                    return '<div class="iw-photo" style="background-image: url(' + location.photo + ');"></div>';
+                                 } else {
+                                    return '';
+                                }
+                                break;
+                            case 'iw-toolbar':
+                                return '<div class="iw-toolbar"><h3 class="md-subhead">' + location.title + '</h3></div>';
+                                break;
+                            case 'div':
+                                switch(part){
+                                    case 'email':
+                                        return '<div class="iw-details"><i class="material-icons" style="color:#4285f4;"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><span><a href="mailto:' + location.email + '" target="_blank">' + location.email + '</a></span></div>';
+                                        break;
+                                    case 'web':
+                                        return '<div class="iw-details"><i class="material-icons" style="color:#4285f4;"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><span><a href="' + location.web + '" target="_blank">' + location.web_formatted + '</a></span></div>';
+                                        break;
+                                    case 'desc':
+                                        return '<label class="iw-desc" for="cb_details"><input type="checkbox" id="cb_details"/><h3 class="iw-x-details">Details</h3><i class="material-icons toggle-open-details"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><p class="iw-x-details">' + location.desc + '</p></label>';
+                                        break;
+                                    default:
+                                        return '<div class="iw-details"><i class="material-icons"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><span>' + location[part] + '</span></div>';
+                                    break;
+                                }
+                                break;
+                            case 'open_hours':
+                                var items = '';
+                                if (location.open_hours.length > 0){
+                                    for (var i = 0; i < location.open_hours.length; ++i) {
+                                        if (i !== 0){
+                                            items += '<li><strong>' + location.open_hours[i].day + '</strong><strong>' + location.open_hours[i].hours +'</strong></li>';
+                                        }
+                                        var first = '<li><label for="cb_hours"><input type="checkbox" id="cb_hours"/><strong>' + location.open_hours[0].day + '</strong><strong>' + location.open_hours[0].hours +'</strong><i class="material-icons toggle-open-hours"><img src="//cdn.mapkit.io/v1/icons/keyboard_arrow_down.svg"/></i><ul>' + items + '</ul></label></li>';
+                                    }
+                                    return '<div class="iw-list"><i class="material-icons first-material-icons" style="color:#4285f4;"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><ul>' + first + '</ul></div>';
+                                 } else {
+                                    return '';
+                                }
+                                break;
+                         }
+                    } else {
+                        return '';
+                    }
+                }
+
+                boxText.innerHTML =
+                    buildPieces(location, 'photo', 'photo', '') +
+                    buildPieces(location, 'iw-toolbar', 'title', '') +
+                    buildPieces(location, 'div', 'address', 'location_on') +
+                    buildPieces(location, 'div', 'web', 'public') +
+                    buildPieces(location, 'div', 'email', 'email') +
+                    buildPieces(location, 'div', 'tel', 'phone') +
+                    buildPieces(location, 'div', 'int_tel', 'phone') +
+                    buildPieces(location, 'open_hours', 'open_hours', 'access_time') +
+                    buildPieces(location, 'div', 'desc', 'keyboard_arrow_down');
+
+                var myOptions = {
+                    alignBottom: true,
+                    content: boxText,
+                    disableAutoPan: true,
+                    maxWidth: 0,
+                    pixelOffset: new google.maps.Size(-140, -40),
+                    zIndex: null,
+                    boxStyle: {
+                        opacity: 1,
+                        width: '280px'
+                    },
+                    closeBoxMargin: '0px 0px 0px 0px',
+                    infoBoxClearance: new google.maps.Size(1, 1),
+                    isHidden: false,
+                    pane: 'floatPane',
+                    enableEventPropagation: false
+                };
+
+                location.ib = new InfoBox(myOptions);
+                location.ib.open(map, marker);
+                location.infoWindowVisible = true;
+            }
+        });
+    }
+
+    function init() {
+        var mapOptions = {
+            center: new google.maps.LatLng(42.653654126699905,21.14741648144542),
+            zoom: 13,
+            gestureHandling: 'auto',
+            fullscreenControl: false,
+            zoomControl: true,
+            disableDoubleClickZoom: true,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            },
+            scaleControl: true,
+            scrollwheel: true,
+            streetViewControl: true,
+            draggable : true,
+            clickableIcons: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: [{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#d3d3d3"}]},{"featureType":"transit","stylers":[{"color":"#808080"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#b3b3b3"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#d7d7d7"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ebebeb"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#696969"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#737373"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#d6d6d6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#dadada"}]}]
+        }
+        var mapElement = document.getElementById('mapkit-3174');
+        var map = new google.maps.Map(mapElement, mapOptions);
+        var locations = [
+            {"title":"SachPizza","address":"Rexhep Luci, Prishtinë","desc":"","tel":"044 896 896","int_tel":"+377 44 896 896","email":"","web":"","web_formatted":"","open":"Closed","time":"0316","lat":42.662564,"lng":21.16019099999994,"photo":"https://lh4.googleusercontent.com/-0aP8II6gyA0/WEgockg4aFI/AAAAAAAAAE8/7UJFuK9s8g0XhagZ8RJuod91n8YCtijqgCLIB/w1280-h853-k/","vicinity":"Rexhep Luci, Prishtinë","open_hours":[{"day":"Monday","hours":"9am–3am","$$hashKey":"object:1780"},{"day":"Tuesday","hours":"9am–3am","$$hashKey":"object:1781"},{"day":"Wednesday","hours":"9am–3am","$$hashKey":"object:1782"},{"day":"Thursday","hours":"9am–3am","$$hashKey":"object:1783"},{"day":"Friday","hours":"9am–3am","$$hashKey":"object:1784"},{"day":"Saturday","hours":"9am–3am","$$hashKey":"object:1785"},{"day":"Sunday","hours":"9am–3am","$$hashKey":"object:1786"}],"marker":{"fillColor":"#3F51B5","fillOpacity":1,"strokeWeight":0,"scale":1.5,"path":"M10.2,0C4.6,0,0,4.6,0,10.2c0,6.9,7.8,6.3,10.2,26.4c2.5-20.1,10.2-19.5,10.2-26.4C20.4,4.6,15.9,0,10.2,0z M10.2,13.9c-2.4,0-4.3-1.9-4.3-4.3s1.9-4.3,4.3-4.3s4.3,1.9,4.3,4.3C14.6,12,12.6,13.9,10.2,13.9z","anchor":{"x":10,"y":30},"origin":{"x":0,"y":0},"style":3},"iw":{"address":true,"desc":true,"email":true,"enable":true,"int_tel":true,"open":true,"open_hours":true,"photo":true,"tel":true,"title":true,"web":true}},{"title":"Albi Outlet","address":"Prishtina","desc":"","tel":"","int_tel":"","email":"","web":"","web_formatted":"","open":"","time":"","lat":42.6426561,"lng":21.112775899999974,"vicinity":"Prishtina","open_hours":"","marker":{"fillColor":"#3F51B5","fillOpacity":1,"strokeWeight":0,"scale":1.5,"path":"M10.2,0C4.6,0,0,4.6,0,10.2c0,6.9,7.8,6.3,10.2,26.4c2.5-20.1,10.2-19.5,10.2-26.4C20.4,4.6,15.9,0,10.2,0z M10.2,13.9c-2.4,0-4.3-1.9-4.3-4.3s1.9-4.3,4.3-4.3s4.3,1.9,4.3,4.3C14.6,12,12.6,13.9,10.2,13.9z","anchor":{"x":10,"y":30},"origin":{"x":0,"y":0},"style":3},"iw":{"address":true,"desc":true,"email":true,"enable":true,"int_tel":true,"open":true,"open_hours":true,"photo":true,"tel":true,"title":true,"web":true}},{"title":"Sach Pizza","address":"Qendra Tregtare Albi Mall, Prishtine 10000","desc":"","tel":"","int_tel":"","email":"","web":"","web_formatted":"","open":"","time":"","lat":42.632693,"lng":21.15222300000005,"photo":"https://lh4.googleusercontent.com/-TdKDjlfDVRw/WNLHuZcHVSI/AAAAAAAAJVo/d-DgkPTSkRoefxIrE-8hZZ14WK-5KiZqACJkC/w1280-h853-k/","vicinity":"Qendra Tregtare Albi Mall, Prishtine 10000","open_hours":[],"marker":{"fillColor":"#3F51B5","fillOpacity":1,"strokeWeight":0,"scale":1.5,"path":"M10.2,0C4.6,0,0,4.6,0,10.2c0,6.9,7.8,6.3,10.2,26.4c2.5-20.1,10.2-19.5,10.2-26.4C20.4,4.6,15.9,0,10.2,0z M10.2,13.9c-2.4,0-4.3-1.9-4.3-4.3s1.9-4.3,4.3-4.3s4.3,1.9,4.3,4.3C14.6,12,12.6,13.9,10.2,13.9z","anchor":{"x":10,"y":30},"origin":{"x":0,"y":0},"style":3},"iw":{"address":true,"desc":true,"email":true,"enable":true,"int_tel":true,"open":true,"open_hours":true,"photo":true,"tel":true,"title":true,"web":true}}
+        ];
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                icon: locations[i].marker,
+                position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+                map: map,
+                title: locations[i].title,
+                address: locations[i].address,
+                desc: locations[i].desc,
+                tel: locations[i].tel,
+                int_tel: locations[i].int_tel,
+                vicinity: locations[i].vicinity,
+                open: locations[i].open,
+                open_hours: locations[i].open_hours,
+                photo: locations[i].photo,
+                time: locations[i].time,
+                email: locations[i].email,
+                web: locations[i].web,
+                iw: locations[i].iw
+            });
+            markersArray.push(marker);
+
+            if (locations[i].iw.enable === true){
+                bindInfoWindow(marker, map, locations[i]);
+            }
+        }
+    }
+            </script>
+            <style>
+                #mapkit-3174 {
+                    height: 350px;
+                    /*width: 600px;*/
+                }
+            </style>
+
+            <div id='mapkit-3174' class="col-md-12"></div>
+
+    </div>
+</div>

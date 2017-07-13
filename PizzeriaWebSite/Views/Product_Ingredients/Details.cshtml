@@ -1,0 +1,35 @@
+﻿@model PizzeriaWebSite.Models.Product_Ingredients
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product_Ingredients</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingredient.IngredientDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingredient.IngredientDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Prod_Ing_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

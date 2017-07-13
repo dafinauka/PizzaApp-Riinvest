@@ -1,0 +1,103 @@
+﻿@model PizzeriaWebSite.ViewModels.ProductIngredientsViewModel
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+}
+@using PizzeriaWebSite.Models;
+<style>
+    #borderimg {
+        border: 10px solid transparent;
+        padding: 15px;
+        -webkit-border-image: url(../../Images/border.png) 30 stretch; /* Safari 3.1-5 */
+        -o-border-image: url(../../Images/border.png) 30 stretch; /* Opera 11-12.1 */
+        border-image: url(../../Images/border.png) 30 stretch;
+    }
+</style>
+<h2 class="text-center">Add Ingredients to: @Model.prod.Name</h2>
+
+@*@Model.prod.Name
+@Model.prod.ProductID*@
+
+<br />
+<div class="container">
+    @using (Html.BeginForm("Save", "Products", FormMethod.Post))
+    {
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/Images/Products/@Model.prod.Image" id="borderimg" class="img-responsive" width="520" height="450"  />
+
+        </div>
+        <div class="col-md-4 col-lg-offset-1">
+            <table class="table text-center">
+                <tr>
+                    <th class="text-center">
+                        Ingredient Name
+                    </th>
+                    <th class="text-center">
+                        Check
+                    </th>
+                    <th class="text-center">
+                        Id
+                    </th>
+                </tr>
+                @foreach (var item in Model.liIngcat)
+                {
+                    <tr>
+                        <td>
+                            @*@item.IngredientDesc*@
+                            @Html.DisplayFor(m => item.IngredientDesc)
+                        </td>
+                        <td>
+                            @{PizzaDemoDBEntities db = new PizzaDemoDBEntities();
+                                var ingredients = db.Product_Ingredients.Where(c => c.ProductID == Model.prod.ProductID && c.Ingredient.IsActive == true).ToList().Select(c => c.IngredientID);
+                            }
+
+                            @if (ingredients.Contains(item.IngredientID))
+                                {
+                                    <input type="checkbox" checked="checked" value="" name="check" />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" value="@item.IngredientID" name="liIngCat" />
+                                }
+                            
+                            @Html.HiddenFor(m => item.IngredientID)
+                            @Html.HiddenFor(m => item.IngredientDesc)
+                            @*<input type="checkbox" value="@item.isChecked " name="@item.IngredientDesc" />*@
+                        </td>
+                        <td>
+                            @item.IngredientID
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <input type="hidden" value="@Model.prod.ProductID" name="productID" />
+        @*@ViewBag.prodID = @Model.prod.ProductID*@
+        <input type="submit" name="submit" value="Add Ingredients" class="btn btn-default col-md-4 col-md-offset-7" />  
+    </div>
+    }
+
+</div>
+@*<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+
+
+    var selected = [];
+    $('input:checked').each(function () {
+        selected.push($(this).attr('id'));
+    });
+
+    $.ajax({
+        url: '',
+        data: { 'liIngcat' : selected},
+        type: "post",
+        success: function (savingStatus) {
+            //alert("success")
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            $('#lblCommentsNotification').text("Error encountered while saving the comments.");
+        }
+    });
+</script>*@

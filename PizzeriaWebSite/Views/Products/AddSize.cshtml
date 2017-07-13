@@ -1,0 +1,43 @@
+﻿@model PizzeriaWebSite.ViewModels.ProductSizeViewModel
+@{
+    ViewBag.Title = "AddSize";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>AddSize</h2>
+
+@ViewBag.Produkti
+@using (Html.BeginForm("SaveSize", "Products", FormMethod.Post))
+{
+    <input type="hidden" value="@Model.prod.ProductID" name="productID" />
+    <table class="table">
+        <tr>
+            <th>Size Name</th>
+            <th>Check</th>
+            <th>Size ID</th>
+            <th>Price</th>
+        </tr>
+        @foreach (var item in Model.liSize)
+        {
+            <tr>
+                <td>
+                    @item.SizeDesc
+                </td>
+                <td>
+                    <input type="checkbox" value="@item.SizeID" name="size" />
+                </td>
+                <td>
+                    @item.SizeID
+                </td>
+                <td>
+                    @*<input type="text" name="cmimi" class="form-control" />*@
+                    @Html.EditorFor(m => m.cmimi, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    <input type="submit" name="submit" value="Save" class="btn btn-default" />
+                </td>
+            </tr>
+
+        }
+    </table>
+}

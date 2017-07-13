@@ -1,0 +1,66 @@
+﻿
+<style>
+   
+
+        #Services12 > div > div {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            flex-wrap: wrap;
+            flex-direction: row;
+            flex-shrink: 0;
+        }
+
+            #Services12 > div > div > * {
+                margin: 1vh;
+                display: block !important;
+            }
+
+    hr.style-two {
+        border: 0;
+        height: 2px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+</style>
+
+
+<div id="Services12">
+    <section class="container-fluid">
+        <section id="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Our Services</h2>
+                        <hr class="style-two" />
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <h1><span class="glyphicon glyphicon-heart aria-hidden=" true""></span></h1>
+                        <h3>@Html.ActionLink("Pizza", "PizzaMenu", "Menu", null, new { @class = "label label-default" })</h3>
+                        <p class="text-muted">Order Pizzas</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h1><span class="glyphicon glyphicon-cutlery aria-hidden=" true""></span></h1>
+                        <h3>@Html.ActionLink("Burgers and Sandwiches", "OthersMenu", "Menu", null, new { @class = "label label-default" })</h3>
+                        <p class="text-muted">Order Burgers, Sandwiches and Others<p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h1><span class="glyphicon glyphicon-glass aria-hidden=" true""></span></h1>
+                        <h3>@Html.ActionLink("Drinks", "DrinksMenu", "Menu", null, new { @class = "label label-default" })</h3>
+                        <p class="text-muted">Order Drinks</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="service-box">
+                            <h1><span class="glyphicon glyphicon-shopping-cart aria-hidden=" true""></span></h1>
+                            <h3>@Html.ActionLink("Cart", "Index", "Cart", null, new { @class = "label label-default" })</h3>
+                            <p class="text-muted">We bring them to you!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>

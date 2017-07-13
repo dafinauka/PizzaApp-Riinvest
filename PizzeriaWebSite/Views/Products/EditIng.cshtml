@@ -1,0 +1,65 @@
+﻿@model PizzeriaWebSite.ViewModels.EditProductViewModel
+@{
+    ViewBag.Title = "EditIng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    #borderimg {
+        border: 10px solid transparent;
+        padding: 15px;
+        -webkit-border-image: url(../../Images/border.png) 30 stretch; /* Safari 3.1-5 */
+        -o-border-image: url(../../Images/border.png) 30 stretch; /* Opera 11-12.1 */
+        border-image: url(../../Images/border.png) 30 stretch;
+    }
+</style>
+<h2 class="text-center">Edit Ingredients of: @Model.prod.Name</h2>
+<br />
+<div class="container">
+    @*@using (Html.BeginForm("SaveEditIng", "Products", FormMethod.Post))
+    {*@
+        <div class="row">
+            <div class="col-md-6">
+                <img src="~/Images/Products/@Model.prod.Image" id="borderimg" class="img-responsive" width="520" height="450" />
+
+            </div>
+            <div class="col-md-4 col-lg-offset-1">
+                <table class="table text-center">
+                    <tr>
+                        <th class="text-center">
+                            Ingredient Name
+                        </th>
+                        <th class="text-center">
+                            Remove
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.liIng)
+                    {
+                        <tr>
+                            <td>
+                                @*@item.IngredientDesc*@
+                                @Html.DisplayFor(m => item.Ingredient.IngredientDesc)
+                            </td>
+                            <td>
+                                @*<input type="submit" name="submit" value="Remove" class="btn btn-danger col-md-12" />*@
+                                @*@Html.ActionLink("Remove", "SaveEditIng","Products", new { id=item.IngredientID }, new { @class="btn btn-danger"})
+                                @Html.HiddenFor(m => item.IngredientID)*@
+                                @using (Html.BeginForm("SaveEditIng", "Products", new { id = item.ProductID, ingID = item.IngredientID }))
+                                {
+
+                                    <input type="hidden" name="productID" value="@item.ProductID" />
+                                    <input type="hidden" name="ingredient" value="@item.IngredientID" />
+
+                                    <input type="submit" name="submit" value="Remove" class="btn btn-danger" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <input type="hidden" value="@Model.prod.ProductID" name="productID" />
+            @*@ViewBag.prodID = @Model.prod.ProductID*@
+        </div>
+        @*//}*@
+
+</div>
+

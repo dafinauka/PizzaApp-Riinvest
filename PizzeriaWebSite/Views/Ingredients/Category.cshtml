@@ -1,0 +1,50 @@
+﻿@model PizzeriaWebSite.ViewModels.IngredientCategoryViewModel
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div class="container">
+    @using (Html.BeginForm("Save", "Ingredients", FormMethod.Post))
+    {
+        <h1>@Model.ingID.IngredientDesc</h1>
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <table class="table text-center">
+                    <tr>
+                        <th class="text-center">
+                            Category Name
+                        </th>
+                        <th class="text-center">
+                            Check
+                        </th>
+                        <th class="text-center">
+                            Id
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.listCat)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.Description)
+                            </td>
+                            <td>
+                                <input type="checkbox" value="@item.CategoryID" name="liCat" />
+                                @Html.HiddenFor(m => item.CategoryID)
+                                @Html.HiddenFor(m => item.Description)
+                            </td>
+                            <td>
+                                @item.CategoryID
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <input type="hidden" value="@Model.ingID.IngredientID" name="ingID" />
+            <input type="submit" name="submit" value="Set Category" class="btn btn-default col-md-3 col-md-offset-1"  />
+        </div>
+    }
+</div>
