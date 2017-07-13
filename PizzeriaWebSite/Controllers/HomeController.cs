@@ -38,7 +38,7 @@ namespace PizzeriaWebSite.Controllers
 
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                 smtpClient.EnableSsl = true;
-                smtpClient.Credentials = new System.Net.NetworkCredential("dafinauka5@gmail.com", "duffyiphone6");
+                smtpClient.Credentials = new System.Net.NetworkCredential("email", "emailPassword");
                 smtpClient.Send(mm);
 
             }
