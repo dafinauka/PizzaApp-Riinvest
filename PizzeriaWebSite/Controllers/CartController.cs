@@ -10,7 +10,7 @@ namespace PizzeriaWebSite.Controllers
 {
     public class CartController : Controller
     {
-        PizzaDemoDBEntities db = new PizzaDemoDBEntities();
+        PizzaDemoDBEntities db = new PizzaDemoDBEntities();//
 
         public ActionResult Index()
         {
